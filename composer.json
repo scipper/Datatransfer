@@ -1,5 +1,5 @@
 {
-    "name": "scipper/Datatransfer",
+    "name": "scipper/datatransfer",
     "type": "library",
     "description": "Tranfers data to Word documents.",
     "keywords": ["scipper","data","transfer"],
