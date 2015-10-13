@@ -13,6 +13,6 @@
    		"phpoffice/phpexcel": "1.8.*"
     },
     "autoload": {
-        "psr-4": { "scipper\\Datatransfer\\": "" }
+        "psr-4": { "scipper\\Datatransfer\\": "src/" }
     }
 }
