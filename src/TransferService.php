@@ -15,14 +15,6 @@ interface TransferService {
 	
 	/**
 	 * 
-	 * @param IncomingData $data
-	 * @return NULL|Map
-	 * @throws GenerationException
-	 */
-	public function generateMap(IncomingData $data);
-	
-	/**
-	 * 
 	 * @param Map $map
 	 * @throws GenerationException
 	 */
