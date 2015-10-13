@@ -17,8 +17,8 @@ class ExcelTransferService implements TransferService {
 	 * (non-PHPdoc)
 	 * @see \scipper\Datatransfer\TransferService::generateMapByTest()
 	 */
-	public function generateMapByTest(MasterTest $masterTest) {
-		
+	public function generateMap(IncomingData $data) {
+		throw new GenerationException("not implemented yet.");
 	}
 	
 	/**
@@ -26,15 +26,15 @@ class ExcelTransferService implements TransferService {
 	 * @see \scipper\Datatransfer\TransferService::generateEmptyDocument()
 	 */
 	public function generateEmptyDocument(Map $map) {
-		
+		throw new GenerationException("not implemented yet.");
 	}
 	
 	/**
 	 * (non-PHPdoc)
 	 * @see \scipper\Datatransfer\TransferService::generateDocument()
 	 */
-	public function generateDocument(Map $map, array $users) {
-		
+	public function generateDocument(Map $map, array $data) {
+		throw new GenerationException("not implemented yet.");
 	}
 	
 	/**

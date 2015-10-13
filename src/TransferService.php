@@ -2,8 +2,6 @@
 
 namespace scipper\Datatransfer;
 
-use de\lsb\Core\Entities\MasterTest;
-
 /**
  * 
  * @author Steffen Kowalski <sk@traiwi.de>
@@ -17,11 +15,11 @@ interface TransferService {
 	
 	/**
 	 * 
-	 * @param MasterTest $masterTest
+	 * @param IncomingData $data
 	 * @return NULL|Map
 	 * @throws GenerationException
 	 */
-	public function generateMapByTest(MasterTest $masterTest);
+	public function generateMap(IncomingData $data);
 	
 	/**
 	 * 
@@ -33,10 +31,10 @@ interface TransferService {
 	/**
 	 * 
 	 * @param Map $map
-	 * @param array $users
+	 * @param array $data
 	 * @throws GenerationException
 	 */
-	public function generateDocument(Map $map, array $users);
+	public function generateDocument(Map $map, array $data);
 	
 	/**
 	 * 
