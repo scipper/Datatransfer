@@ -37,6 +37,18 @@ class ExcelCell {
 	 */
 	protected $protected;
 	
+	/**
+	 * 
+	 * @var string
+	 */
+	protected $type;
+	
+	/**
+	 * 
+	 * @var string
+	 */
+	protected $content;
+	
 	
 	/**
 	 * 
@@ -49,6 +61,7 @@ class ExcelCell {
 		$this->y = (integer) $y;
 		$this->value = $value;
 		$this->protected = $protection;
+		$this->type = "text";
 	}
 	
 	/**
@@ -97,6 +110,38 @@ class ExcelCell {
 	 */
 	public function isProtected() {
 		return (boolean) $this->protected;
+	}
+	
+	/**
+	 * 
+	 * @param string $data
+	 */
+	public function setType($data) {
+		$this->type = (string) $data;
+	}
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function getType() {
+		return (string) $this->type;
+	}
+	
+	/**
+	 * 
+	 * @param string $data
+	 */
+	public function setContent($data) {
+		$this->content = (string) $data;
+	}
+	
+	/**
+	 * 
+	 * @return string
+	 */
+	public function getContent() {
+		return (string) $this->content;
 	}
 	
 }

@@ -13,7 +13,25 @@ namespace scipper\Datatransfer;
  */
 interface Map {
 
+	/**
+	 * 
+	 * @param array $data
+	 * @throws MappingException
+	 */
+	public function addMappingBase(array $data);
 	
+	/**
+	 * 
+	 * @param array $data
+	 * @throws MappingException
+	 */
+	public function addContent(array $data);
+	
+	/**
+	 * 
+	 * @throws MappingException
+	 */
+	public function map();
 	
 }
 

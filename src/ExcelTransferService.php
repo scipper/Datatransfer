@@ -14,10 +14,25 @@ namespace scipper\Datatransfer;
 class ExcelTransferService implements TransferService {
 	
 	/**
+	 * 
+	 * @var string
+	 */
+	protected $documentRoot;
+	
+	
+	/**
+	 * 
+	 * @param string $documentRoot
+	 */
+	public function __construct($documentRoot) {
+		$this->documentRoot = (string) $documentRoot;
+	}
+	
+	/**
 	 * (non-PHPdoc)
 	 * @see \scipper\Datatransfer\TransferService::generateEmptyDocument()
 	 */
-	public function generateEmptyDocument(Map $map) {
+	public function generateDocument(Map $map) {
 		$excel = new \PHPExcel();
 		$excel->removeSheetByIndex(0);
 		
@@ -41,11 +56,23 @@ class ExcelTransferService implements TransferService {
 			
 			$lastOffset = "A";
 			foreach($sheet->getCells() as $cell) {
-				$active->setCellValue($cell->getCoord(), $cell->getValue());
+				//Convert content to list format ist necessary
+				if($cell->getType() == "select") {
+					$dataValidation = $active->getCell($cell->getCoord())->getDataValidation();
+					$dataValidation->setType(\PHPExcel_Cell_DataValidation::TYPE_LIST);
+					$dataValidation->setAllowBlank(false);
+					$dataValidation->setShowInputMessage(true);
+					$dataValidation->setShowDropDown(true);
+					$dataValidation->setFormula1($cell->getContent());
+				} else {
+					$active->setCellValue($cell->getCoord(), $cell->getValue())->getDataValidation();
+				}
+				
+				//Add protection is necessary
 				if($cell->isProtected()) {
 					$active->protectCells($cell->getCoord(), "123");
 					$active->setSharedStyle($protectedStyle, $cell->getCoord());
-				} else {
+				} elseif(!$cell->isProtected() && $active->getProtection()->isProtectionEnabled()) {
 					$active->unprotectCells($cell->getCoord());
 				}
 				$active->getColumnDimension($cell->getX())->setAutoSize(true);
@@ -63,18 +90,10 @@ class ExcelTransferService implements TransferService {
 		
 		$excel->setActiveSheetIndex(0);
 		$writer = \PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
-		$filename = USERDATA_ROOT . $excel->getProperties()->getTitle() . ".xlsx";
+		$filename = $this->documentRoot . $excel->getProperties()->getTitle() . ".xlsx";
 		$writer->save($filename);
 		
 		return $filename;
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see \scipper\Datatransfer\TransferService::generateDocument()
-	 */
-	public function generateDocument(Map $map, array $data) {
-		throw new GenerationException("not implemented yet.");
 	}
 	
 	/**

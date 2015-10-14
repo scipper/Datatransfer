@@ -40,6 +40,30 @@ class ExcelMap implements Map {
 	}
 	
 	/**
+	 * (non-PHPdoc)
+	 * @see \scipper\Datatransfer\Map::addMappingBase()
+	 */
+	public function addMappingBase(array $data) {
+		throw new MappingException("not implemented yet.");
+	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see \scipper\Datatransfer\Map::addContent()
+	 */
+	public function addContent(array $data) {
+		throw new MappingException("not implemented yet.");
+	}
+
+	/**
+	 * (non-PHPdoc)
+	 * @see \scipper\Datatransfer\Map::map()
+	 */
+	public function map() {
+		throw new MappingException("not implemented yet.");
+	}
+	
+	/**
 	 * 
 	 * @param string $data
 	 */

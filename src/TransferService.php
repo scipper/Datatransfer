@@ -16,19 +16,11 @@ interface TransferService {
 	/**
 	 * 
 	 * @param Map $map
-	 * @return string
-	 * @throws GenerationException
-	 */
-	public function generateEmptyDocument(Map $map);
-	
-	/**
-	 * 
-	 * @param Map $map
 	 * @param array $data
 	 * @return string
 	 * @throws GenerationException
 	 */
-	public function generateDocument(Map $map, array $data);
+	public function generateDocument(Map $map);
 	
 	/**
 	 * 
