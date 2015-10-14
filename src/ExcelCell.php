@@ -31,6 +31,12 @@ class ExcelCell {
 	 */
 	protected $value;
 	
+	/**
+	 * 
+	 * @var boolean
+	 */
+	protected $protected;
+	
 	
 	/**
 	 * 
@@ -38,10 +44,11 @@ class ExcelCell {
 	 * @param integer $y
 	 * @param mixed $value
 	 */
-	public function __construct($x, $y, $value = NULL) {
+	public function __construct($x, $y, $value = NULL, $protection = false) {
 		$this->x = (string) $x;
 		$this->y = (integer) $y;
 		$this->value = $value;
+		$this->protected = $protection;
 	}
 	
 	/**
@@ -74,6 +81,22 @@ class ExcelCell {
 	 */
 	public function getValue() {
 		return $this->value;
+	}
+	
+	/**
+	 * 
+	 * @param boolean $protection
+	 */
+	public function setProtection($protection) {
+		$this->protected = (boolean) $protection;
+	}
+	
+	/**
+	 * 
+	 * @return boolean
+	 */
+	public function isProtected() {
+		return (boolean) $this->protected;
 	}
 	
 }

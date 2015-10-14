@@ -40,19 +40,25 @@ class ExcelTransferService implements TransferService {
 			$active = $excel->addSheet(new \PHPExcel_Worksheet(NULL, $sheet->getTitle()), $i);
 			
 			$lastOffset = "A";
+// 			$active->getProtection()->setSheet(true);
+			
 			foreach($sheet->getCells() as $cell) {
 				$active->setCellValue($cell->getCoord(), $cell->getValue());
-				$active->protectCells($cell->getCoord(), "123");
-				$active->setSharedStyle($protectedStyle, $cell->getCoord());
+				if($cell->isProtected()) {
+					$active->protectCells($cell->getCoord(), "123");
+					$active->setSharedStyle($protectedStyle, $cell->getCoord());
+				} else {
+					$active->unprotectCells($cell->getCoord());
+				}
 				
 				$lastOffset = $cell->getX();
 			}
+
+			$active->calculateColumnWidths(true);
 			
-			$active->getProtection()->setSheet(true);
-			
-			$active->getStyle("A3:" . $lastOffset . "25")->getProtection()->setLocked(
-				\PHPExcel_Style_Protection::PROTECTION_UNPROTECTED
-			);
+// 			$active->getStyle("A3:" . $lastOffset . "25")->getProtection()->setLocked(
+// 				\PHPExcel_Style_Protection::PROTECTION_UNPROTECTED
+// 			);
 			
 			$i++;
 		}
