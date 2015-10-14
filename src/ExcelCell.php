@@ -49,6 +49,12 @@ class ExcelCell {
 	 */
 	protected $content;
 	
+	/**
+	 * 
+	 * @var boolean
+	 */
+	protected $visibility;
+	
 	
 	/**
 	 * 
@@ -62,6 +68,7 @@ class ExcelCell {
 		$this->value = $value;
 		$this->protected = $protection;
 		$this->type = "text";
+		$this->visibility = true;
 	}
 	
 	/**
@@ -142,6 +149,22 @@ class ExcelCell {
 	 */
 	public function getContent() {
 		return (string) $this->content;
+	}
+	
+	/**
+	 * 
+	 * @param boolean $data
+	 */
+	public function setVisibility($data) {
+		$this->visibility = (boolean) $data;
+	}
+	
+	/**
+	 * 
+	 * @return boolean
+	 */
+	public function isVisible() {
+		return (boolean) $this->visibility;
 	}
 	
 }

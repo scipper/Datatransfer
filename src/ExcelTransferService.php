@@ -77,6 +77,10 @@ class ExcelTransferService implements TransferService {
 				}
 				$active->getColumnDimension($cell->getX())->setAutoSize(true);
 				
+				if(!$cell->isVisible()) {
+					$active->getColumnDimension($cell->getX())->setVisible(false);
+				}
+				
 				$lastOffset = $cell->getX();
 			}
 
