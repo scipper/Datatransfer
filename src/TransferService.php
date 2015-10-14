@@ -16,6 +16,7 @@ interface TransferService {
 	/**
 	 * 
 	 * @param Map $map
+	 * @return string
 	 * @throws GenerationException
 	 */
 	public function generateEmptyDocument(Map $map);
@@ -24,6 +25,7 @@ interface TransferService {
 	 * 
 	 * @param Map $map
 	 * @param array $data
+	 * @return string
 	 * @throws GenerationException
 	 */
 	public function generateDocument(Map $map, array $data);
@@ -31,6 +33,7 @@ interface TransferService {
 	/**
 	 * 
 	 * @param string $filename
+	 * @return boolean
 	 * @throws ImportException
 	 */
 	public function import($filename);	

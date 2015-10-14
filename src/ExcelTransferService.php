@@ -40,8 +40,6 @@ class ExcelTransferService implements TransferService {
 			$active = $excel->addSheet(new \PHPExcel_Worksheet(NULL, $sheet->getTitle()), $i);
 			
 			$lastOffset = "A";
-// 			$active->getProtection()->setSheet(true);
-			
 			foreach($sheet->getCells() as $cell) {
 				$active->setCellValue($cell->getCoord(), $cell->getValue());
 				if($cell->isProtected()) {
@@ -50,12 +48,12 @@ class ExcelTransferService implements TransferService {
 				} else {
 					$active->unprotectCells($cell->getCoord());
 				}
+				$active->getColumnDimension($cell->getX())->setAutoSize(true);
 				
 				$lastOffset = $cell->getX();
 			}
 
-			$active->calculateColumnWidths(true);
-			
+// 			$active->getProtection()->setSheet(true);
 // 			$active->getStyle("A3:" . $lastOffset . "25")->getProtection()->setLocked(
 // 				\PHPExcel_Style_Protection::PROTECTION_UNPROTECTED
 // 			);
@@ -65,12 +63,10 @@ class ExcelTransferService implements TransferService {
 		
 		$excel->setActiveSheetIndex(0);
 		$writer = \PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
-		$writer->save(USERDATA_ROOT . $excel->getProperties()->getTitle() . ".xlsx");
-			
-// 		$objPHPExcel->getActiveSheet()
-// 			
+		$filename = USERDATA_ROOT . $excel->getProperties()->getTitle() . ".xlsx";
+		$writer->save($filename);
 		
-		
+		return $filename;
 	}
 	
 	/**
