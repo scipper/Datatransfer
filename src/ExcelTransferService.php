@@ -33,6 +33,10 @@ class ExcelTransferService implements TransferService {
 	 * @see \scipper\Datatransfer\TransferService::generateEmptyDocument()
 	 */
 	public function generateDocument(Map $map) {
+		if(!class_exists("PHPExcel")) {
+			throw new GenerationException("dependency 'PHPExcel' not found");
+		}
+		
 		$excel = new \PHPExcel();
 		$excel->removeSheetByIndex(0);
 		
@@ -95,6 +99,7 @@ class ExcelTransferService implements TransferService {
 		$excel->setActiveSheetIndex(0);
 		$writer = \PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
 		$filename = $this->documentRoot . $excel->getProperties()->getTitle() . ".xlsx";
+		
 		$writer->save($filename);
 		
 		return $filename;
