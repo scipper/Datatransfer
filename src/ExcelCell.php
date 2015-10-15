@@ -89,6 +89,14 @@ class ExcelCell {
 	
 	/**
 	 * 
+	 * @return integer
+	 */
+	public function getY() {
+		return (integer) $this->y;
+	}
+	
+	/**
+	 * 
 	 * @param mixed $value
 	 */
 	public function setValue($value) {

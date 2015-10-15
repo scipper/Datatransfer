@@ -57,8 +57,11 @@ class ExcelTransferService implements TransferService {
 		$i = 0;
 		foreach($map->getSheets() as $sheet) {
 			$active = $excel->addSheet(new \PHPExcel_Worksheet(NULL, $sheet->getTitle()), $i);
-			
-			$lastOffset = "A";
+			$active->getProtection()->setSheet(true);
+			$active->getStyle("A1:Z30")->getProtection()->setLocked(
+				\PHPExcel_Style_Protection::PROTECTION_UNPROTECTED
+			);
+
 			foreach($sheet->getCells() as $cell) {
 				//Convert content to list format ist necessary
 				if($cell->getType() == "select") {
@@ -76,23 +79,16 @@ class ExcelTransferService implements TransferService {
 				if($cell->isProtected()) {
 					$active->protectCells($cell->getCoord(), "123");
 					$active->setSharedStyle($protectedStyle, $cell->getCoord());
-				} elseif(!$cell->isProtected() && $active->getProtection()->isProtectionEnabled()) {
-					$active->unprotectCells($cell->getCoord());
+// 				} elseif(!$cell->isProtected() && $active->getProtection()->isProtectionEnabled()) {
+// 					$active->unprotectCells($cell->getCoord());
 				}
 				$active->getColumnDimension($cell->getX())->setAutoSize(true);
 				
 				if(!$cell->isVisible()) {
 					$active->getColumnDimension($cell->getX())->setVisible(false);
 				}
-				
-				$lastOffset = $cell->getX();
 			}
 
-// 			$active->getProtection()->setSheet(true);
-// 			$active->getStyle("A3:" . $lastOffset . "25")->getProtection()->setLocked(
-// 				\PHPExcel_Style_Protection::PROTECTION_UNPROTECTED
-// 			);
-			
 			$i++;
 		}
 		
