@@ -69,7 +69,7 @@ class ExcelTransferService implements TransferService {
 					$dataValidation->setShowDropDown(true);
 					$dataValidation->setFormula1($cell->getContent());
 				} else {
-					$active->setCellValue($cell->getCoord(), $cell->getValue())->getDataValidation();
+					$active->setCellValue($cell->getCoord(), $cell->getValue());
 				}
 				
 				//Add protection is necessary
